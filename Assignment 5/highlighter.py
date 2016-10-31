@@ -18,7 +18,7 @@ def color(text, code=5):
     these to get lovely things like flashing yellow text.
     """
     
-    start_code = "\033[{}m".format(code)
+    start_code = "\033[{}m".format("0;94")
     end_code = "\033[0m"
     
     return (start_code + text + end_code)
@@ -32,20 +32,22 @@ sourceFile = open(sys.argv[3])
 
 syntaxDict = {}
 for line in syntaxFile:
-	values = line.split()
-	syntaxDict[values[1]] = values[0]
+    values = line.split()
+    syntaxDict[values[1]] = values[0]
 
 themeDict = {}
 for line in themeFile:
-	values = line.split()
-	themeDict[values[0][0:-1]] = values[1]
+    values = line.split()
+    themeDict[values[0][0:-1]] = values[1]
 
 for line in sourceFile:
-	for key, value in syntaxDict.items():
-		regex = value[0:-1]
-		theme = themeDict[key]
-		substituted_text = re.findall(regex,line)
-		print(regex)
-		print(line)
-		print(substituted_text)
-
+    for key, value in syntaxDict.items():
+        regex = value[0:-1]
+        theme = themeDict[key]
+        coloringWords = re.findall(regex , line)
+        for word in coloringWords:
+            substituted_text = re.sub(regex, color(word), line)
+        #print(regex)
+        #print(line)
+        print(substituted_text)
+    #print(line)
