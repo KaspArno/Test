@@ -1,0 +1,12 @@
+MANIFEST.in
+README.rst
+setup.py
+mandelbrot/__init__.py
+mandelbrot/mandelbrot_1.py
+mandelbrot/mandelbrot_2.py
+mandelbrot/text.py
+mandelbrot.egg-info/PKG-INFO
+mandelbrot.egg-info/SOURCES.txt
+mandelbrot.egg-info/dependency_links.txt
+mandelbrot.egg-info/not-zip-safe
+mandelbrot.egg-info/top_level.txt
