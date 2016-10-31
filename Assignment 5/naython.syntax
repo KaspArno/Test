@@ -1,1 +1,3 @@
 NNNN.*: comment
+.*\s*\(: function
+\(.*\): argument

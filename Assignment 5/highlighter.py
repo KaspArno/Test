@@ -1,7 +1,7 @@
 import sys
 import re
 
-def color(text, code=5):
+def color(text, code="94"):
     """
     Prints a piece of text in a fancy way. What fancy means depends on the 
     keyword argument code. Some possibilities are:
@@ -18,7 +18,7 @@ def color(text, code=5):
     these to get lovely things like flashing yellow text.
     """
     
-    start_code = "\033[{}m".format("0;94")
+    start_code = "\033[{}m".format(code)
     end_code = "\033[0m"
     
     return (start_code + text + end_code)
@@ -41,13 +41,14 @@ for line in themeFile:
     themeDict[values[0][0:-1]] = values[1]
 
 for line in sourceFile:
-    for key, value in syntaxDict.items():
+    for key, value in list(syntaxDict.items()):
         regex = value[0:-1]
         theme = themeDict[key]
         coloringWords = re.findall(regex , line)
+        #print(coloringWords)
         for word in coloringWords:
-            substituted_text = re.sub(regex, color(word), line)
+            line = re.sub(regex, color(word, theme), line)
         #print(regex)
         #print(line)
-        print(substituted_text)
-    #print(line)
+        #print(substituted_text)
+    print(line)
