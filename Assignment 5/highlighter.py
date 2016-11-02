@@ -23,32 +23,36 @@ def color(text, code="94"):
     
     return (start_code + text + end_code)
 
+def num_groups(regex):
+    return len(re.compile(regex).groups())
 
 
+syntax_file = open(sys.argv[1])
+theme_file = open(sys.argv[2])
+source_file = open(sys.argv[3])
 
-syntaxFile = open(sys.argv[1])
-themeFile = open(sys.argv[2])
-sourceFile = open(sys.argv[3])
-
-syntaxDict = {}
-for line in syntaxFile:
+syntax_dict = {}
+for line in syntax_file:
     values = line.split()
-    syntaxDict[values[1]] = values[0]
+    syntax_dict[values[1]] = values[0]
 
-themeDict = {}
-for line in themeFile:
+theme_dict = {}
+for line in theme_file:
     values = line.split()
-    themeDict[values[0][0:-1]] = values[1]
+    theme_dict[values[0][0:-1]] = values[1]
 
-for line in sourceFile:
-    for key, value in list(syntaxDict.items()):
+for line in source_file:
+    for (key, value) in syntax_dict.items():
         regex = value[0:-1]
-        theme = themeDict[key]
-        coloringWords = re.findall(regex , line)
-        #print(coloringWords)
-        for word in coloringWords:
-            line = re.sub(regex, color(word, theme), line)
+        regex = r"" + regex
         #print(regex)
-        #print(line)
-        #print(substituted_text)
+        theme = theme_dict[key]
+        coloring_words = re.findall(regex , line)
+        #print(coloring_words)
+        #print (regex)
+        #print (line)
+        for word in coloring_words:
+            regex_out = r"" + color(word, theme)
+            regex_out = regex_out + "\1"
+            line = line.replace(word, color(word, theme))
     print(line)

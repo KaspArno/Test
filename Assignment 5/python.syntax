@@ -1,0 +1,8 @@
+\b(if|elif|else)\b: ifelifelse
+(\bfor\b)\s.*in.*:: for-loops
+(\bwhile\b)\s.+:: while-loops
+\bimport\b\s([\w\d]+): imports
+(\bdef\b)\s+[\w\d]+\s?\(.*\):: def
+\bdef\b\s+([\w\d]+)\s?\(.*\):: deffunction
+\bTrue\b|\bFalse\b|\bNone\b: specialstatements
+\".*?\": string
