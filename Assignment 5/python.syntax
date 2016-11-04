@@ -1,8 +1,12 @@
-\b(if|elif|else)\b: ifelifelse
-(\bfor\b)\s.*in.*:: for-loops
+\#.*: comment
+\b[\w\d]*\b(?=\s?\(): function
+(?<=\()[\w\d]*(?=\)): argument
+\bif|elif|else\b(?=.*:): ifelifelse
+(\bfor\b)(?=\s.*in.*:): for-loops
 (\bwhile\b)\s.+:: while-loops
-\bimport\b\s([\w\d]+): imports
-(\bdef\b)\s+[\w\d]+\s?\(.*\):: def
-\bdef\b\s+([\w\d]+)\s?\(.*\):: deffunction
+(?<=import)\s+[\w\d]+: imports
+\bimport\b(?=.+): import
+\bfrom\b(?=.+\bimport\b): fromimport
+\bdef\b(?=\s+[\w\d]+\s?\(.*\)\s*:): def
 \bTrue\b|\bFalse\b|\bNone\b: specialstatements
 \".*?\": string

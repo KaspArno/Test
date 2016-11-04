@@ -1,8 +1,12 @@
-ifelifelse: 
-for-loops: 
-while-loops: 
-imports: 
-def: 
-deffunction: 
-spesialstatements: 
-string:
+comment: 0;95
+function: 0;91
+argument: 0;94
+ifelifelse: 0;90
+for-loops: 0;91
+while-loops: 0;92
+imports: 0;93
+import: 0;92
+fromimport: 0;92
+def: 0;93
+specialstatements: 0;90
+string: 0;94

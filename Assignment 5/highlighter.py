@@ -21,15 +21,20 @@ def color(text, code="94"):
     start_code = "\033[{}m".format(code)
     end_code = "\033[0m"
     
-    return (start_code + text + end_code)
+    return ('\x1b[32m' + text + end_code)
 
 def num_groups(regex):
     return len(re.compile(regex).groups())
 
 
-syntax_file = open(sys.argv[1])
-theme_file = open(sys.argv[2])
-source_file = open(sys.argv[3])
+
+syntax_file = open(sys.argv[1]) #Getting regex syntax file
+theme_file = open(sys.argv[2]) #Getting theme file
+source_file = open(sys.argv[3]) #Getting source file
+
+color_end = r"(?:\s*\()(?!.*\\033\[0m)"
+#color_start = "\033[{}m".format(code)
+color_start = r"(\\x1b\[\d+m)(.*)"
 
 syntax_dict = {}
 for line in syntax_file:
@@ -41,18 +46,16 @@ for line in theme_file:
     values = line.split()
     theme_dict[values[0][0:-1]] = values[1]
 
-for line in source_file:
-    for (key, value) in syntax_dict.items():
-        regex = value[0:-1]
-        regex = r"" + regex
-        #print(regex)
-        theme = theme_dict[key]
-        coloring_words = re.findall(regex , line)
-        #print(coloring_words)
-        #print (regex)
-        #print (line)
-        for word in coloring_words:
-            regex_out = r"" + color(word, theme)
-            regex_out = regex_out + "\1"
-            line = line.replace(word, color(word, theme))
-    print(line)
+text_in_file = source_file.read()
+for (key, value) in syntax_dict.items():
+    regex = value[0:-1]
+    regex = r"" + regex
+    theme = theme_dict[key]
+    coloring_words = re.findall(regex , text_in_file, flags=re.MULTILINE)
+
+    text_in_file = re.sub(regex,"\033[{}m".format(theme) +  '\g<0>' +  "\033[0m", text_in_file, )
+
+print(text_in_file)
+
+def test():
+    return False # Function to test program
