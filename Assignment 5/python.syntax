@@ -1,12 +1,12 @@
 \#.*: comment
 \b[\w\d]*\b(?=\s?\(): function
-(?<=\()[\w\d]*(?=\)): argument
-\bif|elif|else\b(?=.*:): ifelifelse
+\bif(?=.*:)|elif(?=.*:)|else\b(?=.*:): ifelifelse
 (\bfor\b)(?=\s.*in.*:): for-loops
 (\bwhile\b)(?=\s.+:): while-loops
-(?<=import)\s+[\w\d]+: imports
-\bimport\b(?=.+): import
+(?<=\bimport\b\s)[\w\d]+: imports
+\bimport\b(?=\s+[\w\d]+): import
 \bfrom\b(?=.+\bimport\b): fromimport
+(?<=\bfrom\b\s)[\w\d]+(?=\s\bimport\b): importfrom
 \bdef\b(?=\s+[\w\d]+\s?\(.*\)\s*:): def
 \bTrue\b|\bFalse\b|\bNone\b: specialstatements
-\".*?\": string
+(?<=\").*?(?=\"): string

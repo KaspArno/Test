@@ -51,3 +51,5 @@ if j < len(modi): #if the modified file have more lines, show them as added
 
     for k in range(j, len(modi)):
         print("+ " + modi[k])
+
+

@@ -82,46 +82,49 @@ it = re.finditer(regex, s)
 
 test = 0
 cleaning = True
-while cleaning:
-    print(test)
-    test += 1
-    found_one = False
-    for match_start, match_end in zip(color_start_reg.finditer(s), color_end_reg.finditer(s)):
-        #print("test = 0")
-        for inside in color_start_reg.finditer(s[match_start.span()[1]:match_end.span()[0]]):
-            test = 0
-            s = s[:match_end.span()[1]] + match_start.group() + s[match_end.span()[1]:]
-            print("Found one", match_start.span(), inside.span())
-            print(s[match_start.span()[1]:match_end.span()[1]])
-            print(match_start.group())
-            print(s[match_start.span()[1]:match_end.span()[1]+10])
-            found_one = True
-            break
-        if found_one:
-            break
-    if not found_one:
-        cleaning = False
 
-#print(literal_eval(s))
-
-# color_start_loc = []
-# for match in color_start_reg.finditer(s):
-#     print (match.group())
-#     color_start_loc.append(match.span())
+# for match_start, match_end in zip(color_start_reg.finditer(s), color_end_reg.finditer(s)):
+#     for inside_start, inside_end in zip(color_start_reg.finditer(s[match_start.span()[1]:match_end.span()[0]]):
+#         for inside2 in color_end_reg.finditer(s[match_start.span()[1]:match_end.span()[0]]):
+#             s = s[:match_end.span()[1]] + match_start.group() + s[match_end.span()[1]:]
+#             print("Found one", match_start.span(), inside2.span())
+#             print(s[match_start.span()[1]:match_end.span()[1]])
+#             print(match_start.group())
+#             print(s[match_start.span()[1]:match_end.span()[1]+10])
+#             found_one = True
+#             break
+i = 0
+test_reg = re.compile(r"Kasper")
 
 
-#print(repr(text_in_file[color_start.span()[1]:color_end.span()[0]]))
+inserts = []
+for match_start, match_end in zip(color_start_reg.finditer(s), color_end_reg.finditer(s)):
+    i += 1
+    print(i)
+    if color_start_reg.search(s[match_start.span()[1]:match_end.span()[0]]):
+        inserts.append([match_start.group(), match_end.span()[1]])
+        #s = s[:match_end.span()[1]] + match_start.group() + s[match_end.span()[1]]
+        print("Foundone")
+        print (match_start.group())
+        found_one = True
+    else:
+        print("NEI")
 
-# while color_start != None:
-#     if color_start_reg.search(repr(text_in_file[color_start.span()[1]-4:color_end.span()[0]-4])) == None:
-#         color_start = color_start_reg.search(repr(text_in_file[color_end.span()[1]:]))
-#         color_end = color_end_reg.search(repr(text_in_file[color_end.span()[1]:]))
-#         print(repr(text_in_file[color_start.span()[1]-4:color_end.span()[0]-4]))
-#         print(color_start.span())
-#         color_start = None
+
+for reg, index in reversed(inserts):
+    s = s[:index] + reg + s[index:]
+    #print(reg)
+    #print(index)
+
+#print(s)
 
 
-#print(repr(text_in_file))
+
+text_in_file = literal_eval(s)
+
+print(text_in_file)
+
+
 
 def test():
     return False # Function functo test program func(arg) dette burde være kommentert
