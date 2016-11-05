@@ -3,7 +3,7 @@
 (?<=\()[\w\d]*(?=\)): argument
 \bif|elif|else\b(?=.*:): ifelifelse
 (\bfor\b)(?=\s.*in.*:): for-loops
-(\bwhile\b)\s.+:: while-loops
+(\bwhile\b)(?=\s.+:): while-loops
 (?<=import)\s+[\w\d]+: imports
 \bimport\b(?=.+): import
 \bfrom\b(?=.+\bimport\b): fromimport

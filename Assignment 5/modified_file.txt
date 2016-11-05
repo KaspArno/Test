@@ -1,4 +1,7 @@
-ab
-bcdef
-bo
-d ef gh ij K
+a
+b
+d
+d
+c
+e
+f

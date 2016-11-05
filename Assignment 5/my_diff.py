@@ -1,57 +1,53 @@
 import sys
-import re
 
-original_file = open(sys.argv[1])
-modified_file = open(sys.argv[2])
+#Gatering text from files, splitting them into lines to avoid \n
+with open(sys.argv[1]) as f:
+    orig = f.read().splitlines()
 
-original_text = original_file.read()
-modified_text = modified_file.read()
+with open(sys.argv[2]) as f:
+    modi = f.read().splitlines() 
 
-regex = r".+?"
-i = len(original_text)
-text = original_text[:i]
+i,j = 0,0 #initiating iteration
 
+while i < len(orig) and j < len(modi): #loops troug both textfiles, cheking for modirations
 
-print(re.search(text + regex, modified_text))
+    if orig[i] == modi[j]:
+        print("0 "+ orig[i])
+        i += 1
+        j += 1
+    else:
+        found = False
+        found2 = False
+        for k in range(j, len(modi)): #Cheking to see if the line have been moved futher down
+            if orig[i] == modi[k]:
+                found = True
+                break
+            for l in range(i, len(orig)): #Cheking whter the lines exist, to know if they are additions
+                #print("k: ", k, "l: ", l)
+                if modi[k] == orig[l]:
+                    found2 = True
+                    break
+            if found2:
+                break
 
-while re.search(text + regex, modified_text) == None:
-    i -= 1
-    text = original_text[:i]
-    
-    #print(i)
-    #print(text)
-    #print(re.search(text + regex, modified_text))
+        if found: #If the line is found, add all other as addtitoin lines
+            for k in range(j, len(modi)):
+                if orig[i] == modi[k]:
+                    print("0 " + orig[i])
+                    i += 1
+                    j += 1
+                    break
+                else:
+                    print("+ " + modi[k])
+                    j += 1
+        else: #If the line is not found
+            print("- " + orig[i])
+            i += 1
 
-text = original_text[:i+1]
-print(text)
+if i < len(orig): #if the original text have more line, show them as delited
+    for k in range(i,len(orig)):
+        print("- " + orig[k])
+if j < len(modi): #if the modified file have more lines, show them as added
 
-text = re.sub(r"(^)", r"0 \1", text, flags=re.M)
-
-print(text)
-
-print(i)
-
-remaining = original_text[i+1:]
-
-print(remaining)
-
-test = re.search(r".*\n", remaining)
-print(test)
-
-
-
-
-
-# for orig, modi in zip(original_file, modified_file):
-#     if orig == modi:
-#         print("true")
-#         print("0 ", orig)
-#     else:
-#         print("false")
-#         temp = orig
-#         temp = temp.replace('\n', '')
-#         print(temp)
-#         if re.match(temp, modi):
-#             print("+ ", orig)
-#         else:
-#             print("- ", orig)
+    for k in range(j, len(modi)):
+        print("+ " + modi[k])
