@@ -1,2 +1,2 @@
-\+.*: added
--.*: delited
+"\+.*": added
+"-.*": delited

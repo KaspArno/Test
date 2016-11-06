@@ -4,7 +4,7 @@ from ast import literal_eval
 
 def cleaning(key, text): #a function to clean up longer text like comments and strings
     regex = r"" + syntax_dict[key]
-    regex = regex[:-1]
+    regex = regex[1:-2]
     theme = theme_dict[key]
     text2 = open(sys.argv[3]).read() #Creates a clean string withoyt any coloring
     clean = re.findall(regex, text2)
@@ -30,7 +30,7 @@ for line in theme_file: #add all theme codes in a dictionary, key = what to colo
 
 text_in_file = source_file.read()
 for (key, value) in syntax_dict.items(): #iterates trou every syntax and color according to theme
-    regex = value[0:-1]
+    regex = value[1:-2]
     regex = r"" + regex
     theme = theme_dict[key]
     coloring_words = re.findall(regex , text_in_file, flags=re.MULTILINE)
