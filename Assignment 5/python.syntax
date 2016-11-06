@@ -1,7 +1,7 @@
 \#.*: comment
-\b[\w\d]*\b(?=\s?\(): function
+(?!\bfor\b)(?!\bif\b)(?!\belif\b)(?!\belse\b)(?!\bwhile\b)\b[\w\d]+\b(?=\s?\(): function
 \bif(?=.*:)|elif(?=.*:)|else\b(?=.*:): ifelifelse
-(\bfor\b)(?=\s.*in.*:): for-loops
+(\bfor\b)(?=\s.*\bin\b.*:): for-loops
 (\bwhile\b)(?=\s.+:): while-loops
 (?<=\bimport\b\s)[\w\d]+: imports
 \bimport\b(?=\s+[\w\d]+): import
@@ -9,4 +9,5 @@
 (?<=\bfrom\b\s)[\w\d]+(?=\s\bimport\b): importfrom
 \bdef\b(?=\s+[\w\d]+\s?\(.*\)\s*:): def
 \bTrue\b|\bFalse\b|\bNone\b: specialstatements
-(?<=\").*?(?=\"): string
+\".*?": string
+\bbreak\b|\breturn\b: endings

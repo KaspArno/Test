@@ -1,0 +1,13 @@
+comment: 0;90
+function: 0;95
+ifelifelse: 0;96
+for-loops: 0;96
+while-loops: 0;96
+imports: 0;45
+import: 0;44
+fromimport: 0;44
+importfrom: 0;45
+def: 0;91
+specialstatements: 0;41
+string: 0;92
+endings: 0;41

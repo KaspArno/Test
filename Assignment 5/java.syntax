@@ -1,0 +1,10 @@
+\/\/.*: comment
+(?!\bif\b)(?!for)(?!while)\b[\w\d]+\b(?=\s?\(): function
+\bif\b(?=.*\n?{[^}]*)|else\sif(?=.*\n?{[^}]*)|else\b(?=.*\n?{[^}]*): ifelifelse
+\bfor\b(?=.*\n?{[^}]*): for-loops
+\bwhile\b(?=.*\n?{[^}]*): while-loops
+(?<=import\s).+(?=;): imports
+import(?=\s.+;): import
+\btrue\b|\bfalse\b: specialstatements
+\".*?\": string
+\b[A-Z][\w\d]*\b: object

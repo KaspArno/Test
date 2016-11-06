@@ -16,3 +16,5 @@ while True:
 
 
 print("Fin")
+
+#Ellers må jeg teste("hvas som skjer her") og om slike er True, import Kasper og mer
